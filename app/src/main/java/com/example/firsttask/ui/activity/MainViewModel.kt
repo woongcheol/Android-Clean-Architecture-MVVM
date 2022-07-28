@@ -1,4 +1,4 @@
-package com.example.firsttask.ui
+package com.example.firsttask.ui.activity
 
 import com.example.firsttask.base.BaseViewModel
 
