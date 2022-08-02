@@ -6,6 +6,7 @@ import com.example.firsttask.R
 
 import com.example.firsttask.base.BaseActivity
 import com.example.firsttask.databinding.ActivityMainBinding
+import com.example.firsttask.repository.model.remote.request.BookData
 import com.example.firsttask.repository.model.remote.request.BookDataItems
 import com.example.firsttask.repository.retrofit.RetrofitConnection
 import com.example.firsttask.repository.retrofit.RetrofitService
@@ -35,10 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val retrofitAPI = RetrofitConnection.getInstanceBack().create(RetrofitService::class.java)
 
         retrofitAPI.getBookData("android", "books")
-            .enqueue(object : Callback<BookDataItems> {
+            .enqueue(object : Callback<BookData> {
                 override fun onResponse(
-                    call: Call<BookDataItems>,
-                    response: Response<BookDataItems>
+                    call: Call<BookData>,
+                    response: Response<BookData>
                 ) {
                     if (response.isSuccessful) {
                         Log.d("testt", "${response.body()}")
@@ -46,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     }
                 }
 
-                override fun onFailure(call: Call<BookDataItems>, t: Throwable) {
+                override fun onFailure(call: Call<BookData>, t: Throwable) {
                     t.printStackTrace()
                 }
             })

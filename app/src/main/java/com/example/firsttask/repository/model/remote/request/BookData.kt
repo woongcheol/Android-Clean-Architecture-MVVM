@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class BookData(
     @SerializedName("kind") var kind: String?,
     @SerializedName("totalItems") var totalItems: Int?,
-    @SerializedName("items") var items: List<BookDataItems>
+    @SerializedName("items") var items: List<BookDataItems>?
 )

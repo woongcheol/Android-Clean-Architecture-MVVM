@@ -35,10 +35,10 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.Holder>() {
         fun bindBookItem(item: BookDataVolumeInfo) {
             binding.bookTitle.text = item.title
             binding.bookDes.text = item.description
-            binding.bookAu.text = item.authors
+//            binding.bookAu.text = item.authors
 
             // 썸네일
-            Glide.with(itemView.context).load("${item.thumbnail}").into(binding.imageView)
+//            Glide.with(itemView.context).load("${item.imageLinks?.thumbnail}").into(binding.imageView)
         }
     }
 }

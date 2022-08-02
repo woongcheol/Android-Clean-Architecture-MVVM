@@ -1,5 +1,6 @@
 package com.example.firsttask.repository.retrofit
 
+import com.example.firsttask.repository.model.remote.request.BookData
 import com.example.firsttask.repository.model.remote.request.BookDataItems
 import retrofit2.Call
 import retrofit2.http.GET
@@ -11,5 +12,5 @@ interface RetrofitService {
     fun getBookData(
         @Query("q") title: String,
         @Query("printType") keyword: String
-    ) : Call<BookDataItems>
+    ) : Call<BookData>
 }
