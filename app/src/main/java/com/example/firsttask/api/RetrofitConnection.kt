@@ -1,4 +1,4 @@
-package com.example.firsttask.repository.retrofit
+package com.example.firsttask.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -26,5 +26,6 @@ class RetrofitConnection {
             return INSTANCE!!
         }
 
+        val service = INSTANCE!!.create(RetrofitService::class.java)
     }
 }

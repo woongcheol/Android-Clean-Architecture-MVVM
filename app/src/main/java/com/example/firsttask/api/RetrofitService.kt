@@ -1,7 +1,6 @@
-package com.example.firsttask.repository.retrofit
+package com.example.firsttask.api
 
-import com.example.firsttask.repository.model.remote.request.BookData
-import com.example.firsttask.repository.model.remote.request.BookDataItems
+import com.example.firsttask.repository.model.remote.response.BookData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

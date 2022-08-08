@@ -3,9 +3,8 @@ package com.example.firsttask.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.firsttask.databinding.ItemBookBinding
-import com.example.firsttask.repository.model.remote.request.BookDataVolumeInfo
+import com.example.firsttask.repository.model.remote.response.BookDataVolumeInfo
 
 class BookListAdapter : RecyclerView.Adapter<BookListAdapter.Holder>() {
     lateinit var bookList: ArrayList<BookDataVolumeInfo>
