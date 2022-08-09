@@ -16,6 +16,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // ViewPager 추가
+        createViewPager()
+
+    }
+
+    fun createViewPager() {
         val bookListFragment = BookListFragment()
         val SelectedBookListFragment = SelectedBookListFragment()
 
@@ -38,5 +44,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }.attach()
     }
-
 }
