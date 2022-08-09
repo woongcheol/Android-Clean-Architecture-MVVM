@@ -4,19 +4,19 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.firsttask.repository.model.remote.response.BookData
 import com.example.firsttask.api.RetrofitConnection
-import com.example.firsttask.repository.model.remote.response.volumeInfo
+import com.example.firsttask.repository.model.remote.response.BookContent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class BookRemoteDataSourceImpl() : BookRemoteDataSource {
 
-    val _bookContent = MutableLiveData<ArrayList<volumeInfo>>()
+    val _bookContent = MutableLiveData<ArrayList<BookContent>>()
 
-    override fun getBookData(title:String, keyword: String) {
+    override fun getBookData(title:String, keyword: String, page:Int) {
 
         RetrofitConnection.getInstanceBack()
-        val bookApi = RetrofitConnection.service!!.getBookData(title, keyword)
+        val bookApi = RetrofitConnection.service!!.getBookData(title, keyword, page)
 
         bookApi.enqueue(object : Callback<BookData> {
                 override fun onResponse(

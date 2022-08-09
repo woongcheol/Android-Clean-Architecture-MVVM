@@ -10,6 +10,7 @@ interface RetrofitService {
     @GET("books/v1/volumes")
     fun getBookData(
         @Query("q") title: String,
-        @Query("printType") keyword: String
+        @Query("printType") keyword: String,
+        @Query("startIndex") page: Int
     ) : Call<BookData>
 }

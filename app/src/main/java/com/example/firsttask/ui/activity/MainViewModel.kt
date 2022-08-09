@@ -2,21 +2,20 @@ package com.example.firsttask.ui.activity
 
 import androidx.lifecycle.LiveData
 import com.example.firsttask.base.BaseViewModel
-import com.example.firsttask.repository.model.remote.response.BookDataVolumeInfo
-import com.example.firsttask.repository.model.remote.response.volumeInfo
+import com.example.firsttask.repository.model.remote.response.BookContent
 import com.example.firsttask.repository.source.remote.BookRemoteDataSourceImpl
 
 class MainViewModel: BaseViewModel() {
     private val bookRemoteDataSourceImpl = BookRemoteDataSourceImpl()
 
-    private val bookContent: LiveData<ArrayList<volumeInfo>>
+    private val bookContent: LiveData<ArrayList<BookContent>>
         get() = bookRemoteDataSourceImpl._bookContent
 
-    fun loadBookContent(title:String, keyword: String) {
-        bookRemoteDataSourceImpl.getBookData(title, keyword)
+    fun loadBookContent(title:String, keyword: String, page: Int) {
+        bookRemoteDataSourceImpl.getBookData(title, keyword, page)
     }
 
-    fun getAll() : LiveData<ArrayList<volumeInfo>> {
+    fun getAll() : LiveData<ArrayList<BookContent>> {
         return bookContent
     }
 }
