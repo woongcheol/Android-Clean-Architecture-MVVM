@@ -1,11 +1,11 @@
-package com.example.firsttask.ui.activity
+package com.example.firsttask.ui.fragment
 
 import androidx.lifecycle.LiveData
 import com.example.firsttask.base.BaseViewModel
 import com.example.firsttask.repository.model.remote.response.BookContent
 import com.example.firsttask.repository.source.remote.BookRemoteDataSourceImpl
 
-class MainViewModel: BaseViewModel() {
+class BookListViewModel: BaseViewModel() {
     private val bookRemoteDataSourceImpl = BookRemoteDataSourceImpl()
 
     private val bookContent: LiveData<ArrayList<BookContent>>
