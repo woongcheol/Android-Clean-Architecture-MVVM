@@ -1,5 +1,6 @@
 package com.example.firsttask.api
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,7 +8,8 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitConnection {
     companion object {
-        private const val BASE_URL = "https://www.googleapis.com"
+        private const val BASE_URL = "https://www.googleapis.com/"
+        var service: RetrofitService? = null
         private var INSTANCE: Retrofit? = null
 
         fun getInstanceBack(): Retrofit {
@@ -23,9 +25,9 @@ class RetrofitConnection {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
+
+            service = INSTANCE!!.create(RetrofitService::class.java)
             return INSTANCE!!
         }
-
-        val service = INSTANCE!!.create(RetrofitService::class.java)
     }
 }

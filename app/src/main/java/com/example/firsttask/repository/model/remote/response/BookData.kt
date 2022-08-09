@@ -3,7 +3,7 @@ package com.example.firsttask.repository.model.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class BookData(
-    @SerializedName("items") var items: List<volumeInfo>?
+    @SerializedName("items") var items: ArrayList<volumeInfo>?
 )
 
 data class volumeInfo(

@@ -11,14 +11,12 @@ import retrofit2.Response
 
 class BookRemoteDataSourceImpl() : BookRemoteDataSource {
 
-    val _bookContent = MutableLiveData<List<volumeInfo>>()
+    val _bookContent = MutableLiveData<ArrayList<volumeInfo>>()
 
     override fun getBookData(title:String, keyword: String) {
 
-        Log.d("testt", "start")
-
         RetrofitConnection.getInstanceBack()
-        val bookApi = RetrofitConnection.service.getBookData(title, keyword)
+        val bookApi = RetrofitConnection.service!!.getBookData(title, keyword)
 
         bookApi.enqueue(object : Callback<BookData> {
                 override fun onResponse(
@@ -26,15 +24,15 @@ class BookRemoteDataSourceImpl() : BookRemoteDataSource {
                     response: Response<BookData>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("testt", "${response.body()}")
+                        Log.d("testt", "${response.body()!!.items!!}")
                         _bookContent.value = response.body()!!.items!!
                     } else {
-                        Log.v("로그", "응답 없음")
+                        Log.d("testt", "응답 없음")
                     }
                 }
 
                 override fun onFailure(call: Call<BookData>, t: Throwable) {
-                    Log.v("로그", "통신 실패")
+                    Log.d("testt", "통신 실패")
                 }
             })
     }
