@@ -32,18 +32,16 @@ class BookListFragment : BaseFragment<FragmentBookListBinding>(R.layout.fragment
 
         // 이전 페이지
         binding.prevContent.setOnClickListener {
-            if (page > 11) {
-                page -= 11
+            if (page >= 10) {
+                page -= 10
                 model.loadBookContent("android", "books", page)
             }
         }
 
         // 다음 페이지
         binding.nextContent.setOnClickListener {
-            page += 11
+            page += 10
             model.loadBookContent("android", "books", page)
         }
-
-        super.onViewCreated(view, savedInstanceState)
     }
 }
