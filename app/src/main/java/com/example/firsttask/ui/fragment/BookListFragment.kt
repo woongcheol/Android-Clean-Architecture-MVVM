@@ -19,13 +19,10 @@ class BookListFragment : BaseFragment<FragmentBookListBinding>(R.layout.fragment
     private val model: ViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // DB 생성
-        val bookDao = BookDB.getInstance(requireContext()).bookDao()
-        val bookLocalDataSource = BookLocalDataSourceImpl(bookDao)
 
         // 어댑터 연결
         binding.bookList.layoutManager = LinearLayoutManager(context)
-        bookAdapter = BookListAdapter(bookLocalDataSource)
+        bookAdapter = BookListAdapter(model)
         binding.bookList.adapter = bookAdapter
 
         // 최초 페이지 불러오기

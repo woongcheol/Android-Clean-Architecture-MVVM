@@ -3,6 +3,7 @@ package com.example.firsttask.ui.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firsttask.R
@@ -10,12 +11,13 @@ import com.example.firsttask.databinding.ItemBookBinding
 import com.example.firsttask.repository.model.local.SelectedInfo
 import com.example.firsttask.repository.model.remote.response.BookContent
 import com.example.firsttask.repository.source.local.BookLocalDataSourceImpl
+import com.example.firsttask.viewmodel.ViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 
-class BookListAdapter(val bookLocalDataSource: BookLocalDataSourceImpl) :
+class BookListAdapter(val model: ViewModel) :
     RecyclerView.Adapter<BookListAdapter.Holder>() {
     private var bookList = ArrayList<BookContent>()
 
@@ -27,7 +29,7 @@ class BookListAdapter(val bookLocalDataSource: BookLocalDataSourceImpl) :
             parent, false
         )
 
-        return Holder(binding, bookLocalDataSource)
+        return Holder(binding, model)
     }
 
     // 항목 뷰에 데이터 연결
@@ -45,7 +47,7 @@ class BookListAdapter(val bookLocalDataSource: BookLocalDataSourceImpl) :
         bookList = data
     }
 
-    inner class Holder(val binding: ItemBookBinding, val bookLocalDataSource: BookLocalDataSourceImpl) :
+    inner class Holder(val binding: ItemBookBinding, val model: ViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindBookItem(item: BookContent) {
             // 초기 값
@@ -62,7 +64,7 @@ class BookListAdapter(val bookLocalDataSource: BookLocalDataSourceImpl) :
                 binding.imageView.setImageResource(R.drawable.book_image_default)
             }
 
-            // 찜 기능
+            // 찜 기능 - 삭제
             binding.selectedBook.setOnClickListener {
                 binding.selectedBook.setImageResource(R.drawable.book_selected_on)
 
@@ -72,13 +74,12 @@ class BookListAdapter(val bookLocalDataSource: BookLocalDataSourceImpl) :
                     item.volumeInfo!!.title,
                     item.volumeInfo!!.description ?: "내용 없음",
                     item.volumeInfo!!.authors.toString(),
-                    item.volumeInfo!!.imageLinks.thumbnail
+                    if (item.volumeInfo!!.imageLinks != null) item.volumeInfo!!.imageLinks.thumbnail else null
                 )
 
                 // DB 입력 - 코루틴
                 GlobalScope.launch {
-                    bookLocalDataSource.insertBook(item)
-                    Log.d("testt DB", "${bookLocalDataSource.getLocalALL()}")
+                    model.insertBook(item)
                 }
             }
         }

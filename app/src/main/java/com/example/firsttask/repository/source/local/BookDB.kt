@@ -8,7 +8,7 @@ import com.example.firsttask.repository.model.local.SelectedInfo
 
 @Database(
     entities = [SelectedInfo::class],
-    version = 1
+    version = 2
 )
 abstract class BookDB : RoomDatabase() {
     abstract fun bookDao(): BookDao
