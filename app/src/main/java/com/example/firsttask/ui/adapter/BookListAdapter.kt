@@ -1,26 +1,22 @@
 package com.example.firsttask.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firsttask.R
 import com.example.firsttask.databinding.ItemBookBinding
 import com.example.firsttask.repository.model.local.SelectedInfo
 import com.example.firsttask.repository.model.remote.response.BookContent
-import com.example.firsttask.repository.source.local.BookLocalDataSourceImpl
 import com.example.firsttask.viewmodel.ViewModel
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 
 class BookListAdapter(val model: ViewModel) :
     RecyclerView.Adapter<BookListAdapter.Holder>() {
     private var bookList = ArrayList<BookContent>()
-
 
     // 항목에 사용할 뷰 생성 및 뷰 홀더 반환
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -45,6 +41,18 @@ class BookListAdapter(val model: ViewModel) :
 
     fun setList(data: ArrayList<BookContent>) {
         bookList = data
+    }
+
+    // DiffUtil 적용
+    fun replaceItems(newBookList: ArrayList<BookContent>) {
+        val adapter = this
+        val diffCallback = BookListDiffCallback(bookList, newBookList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        bookList.clear()
+        bookList.addAll(newBookList)
+
+        diffResult.dispatchUpdatesTo(adapter)
     }
 
     inner class Holder(val binding: ItemBookBinding, val model: ViewModel) :
